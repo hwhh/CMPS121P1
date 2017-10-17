@@ -14,11 +14,14 @@ import java.util.ArrayList;
 
 public class EnterInfoActivity extends AppCompatActivity {
 
+    static DataHandler d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_info);
+
+
 
         Button button_done = (Button) findViewById(R.id.button_done);
         EditText editTextName = (EditText) findViewById(R.id.editText); //TODO change name of edit
@@ -33,6 +36,8 @@ public class EnterInfoActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerArrayAdapter);
+
+
 
         button_done.setOnClickListener(v -> {
             String name = editTextName.getText().toString();

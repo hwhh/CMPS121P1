@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,8 +18,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    SavedPictures savedPictures;
+    DataHandler d =  DataHandler.getInstance();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -28,30 +26,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Context context = this.getApplicationContext();
 
-
         Bundle b = getIntent().getExtras();
-        if(b == null){
+        if(b == null){ //first time opening app
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             String json = appSharedPrefs.getString("pictureList1", "");
             Type picturesList = new TypeToken<ArrayList<Picture>>(){}.getType();
-//            if(json.equals(""))
-//            savedPictures = new ArrayList<>();
-//            else
-//            pictures = new Gson().fromJson(json, picturesList);
+
+            d.setList(new Gson().fromJson(json, picturesList));
         }else{
-          //  Picture p = b.getParcelable("practical1.com.practical.Picture");
-          //  pictures.add(p);
+              Picture p = b.getParcelable("practical1.com.practical.Picture");
+              d.getList().add(p);
         }
-
-
-
         Button exitButton = (Button) findViewById(R.id.exit_button);
 
         exitButton.setOnClickListener(v -> {
             SharedPreferences mPrefs= context.getSharedPreferences(context.getApplicationInfo().name, Context.MODE_PRIVATE);
             SharedPreferences.Editor ed=mPrefs.edit();
             Gson gson = new Gson();
-            //ed.putString("pictures", gson.toJson(pictures));
+            ed.putString("pictures", gson.toJson(d.getList()));
             ed.apply();
         });
 
@@ -60,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
         infoButton.setOnClickListener(v -> {
             //TODO Refactor to take list out
             Intent intent = new Intent(MainActivity.this, EnterInfoActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("pictures", savedPictures);
-            intent.putExtras(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putParcelableArrayList("pictures", (ArrayList<? extends Parcelable>) pictures);
+//            intent.putExtras(bundle);
             startActivity(intent);
         });
 
@@ -71,64 +63,26 @@ public class MainActivity extends AppCompatActivity {
         viewButton.setOnClickListener(v -> {
             //TODO Refactor to take list out
             Intent intent = new Intent(MainActivity.this, ViewActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("pictures", savedPictures);
-            intent.putExtras(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putParcelableArrayList("pictures", (ArrayList<? extends Parcelable>) pictures);
+//            intent.putExtras(bundle);
             startActivity(intent);
         });
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current game state
-        savedInstanceState.putParcelable("pictureList", savedPictures);
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        // Always call the superclass so it can restore the view hierarchy
-        super.onRestoreInstanceState(savedInstanceState);
-        // Restore state members from saved instance
-        savedPictures = savedInstanceState.getParcelable("pictureList");
-
-    }
-}
-
-class SavedPictures implements Parcelable{
-    private List<Picture> pictures;
-
-    public SavedPictures() {
-        this.pictures = pictures = new ArrayList<>();
-    }
-
-    public List<Picture> getPictures() {
-        return pictures;
-    }
-
-    protected SavedPictures(Parcel in) {
-        pictures = in.createTypedArrayList(Picture.CREATOR);
-    }
-
-    public static final Creator<SavedPictures> CREATOR = new Creator<SavedPictures>() {
-        @Override
-        public SavedPictures createFromParcel(Parcel in) {
-            return new SavedPictures(in);
-        }
-
-        @Override
-        public SavedPictures[] newArray(int size) {
-            return new SavedPictures[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(pictures);
-    }
+//    @Override
+//    public void onSaveInstanceState(Bundle savedInstanceState) {
+//        // Save the user's current game state
+//        savedInstanceState.putParcelableArrayList("pictureList", (ArrayList<? extends Parcelable>) pictures);
+//        // Always call the superclass so it can save the view hierarchy state
+//        super.onSaveInstanceState(savedInstanceState);
+//    }
+//
+//    public void onRestoreInstanceState(Bundle savedInstanceState) {
+//        // Always call the superclass so it can restore the view hierarchy
+//        super.onRestoreInstanceState(savedInstanceState);
+//        // Restore state members from saved instance
+//        pictures = savedInstanceState.getParcelableArrayList("pictureList");
+//
+//    }
 }
