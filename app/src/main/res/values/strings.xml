@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Practical1</string>
+    <string name="exit">Exit</string>
+    <string name="enter_info">Enter ​Info</string>
+    <string name="view">View</string>
+    <string name="done">Done</string>
+    <string name="photo_name">Photo Name</string>
+    <string name="photographer_name">Photographer Name</string>
 </resources>
