@@ -3,11 +3,14 @@ package practical1.com.practical1;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+/**
+ * Picture class to hold needed data, implements Parcelable to allow the data to be transferred between activities
+ * and is more efficient than serializable
+ */
 public class Picture implements Parcelable {
 
 
-    private String name, photographer, year;
+    public String name, photographer, year;
 
     public Picture(String name, String photographer, String year) {
         this.name = name;

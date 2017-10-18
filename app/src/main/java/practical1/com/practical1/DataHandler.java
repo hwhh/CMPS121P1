@@ -3,6 +3,9 @@ package practical1.com.practical1;
 
 import java.util.ArrayList;
 
+/**
+ * Singleton class used to store data transferred between multiple activities
+ */
 public class DataHandler {
 
     private static DataHandler handler;
@@ -11,8 +14,9 @@ public class DataHandler {
     private DataHandler() {
     }
 
+
     public static DataHandler getInstance() {
-        if (handler == null)
+        if (handler == null) //Makes sure only one instance is running
             handler = new DataHandler();
         return handler;
     }

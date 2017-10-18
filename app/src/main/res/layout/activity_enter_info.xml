@@ -14,38 +14,38 @@
         android:text="@string/done" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/name_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/photo_name"
-        android:layout_above="@+id/spinner2"
+        android:layout_above="@+id/years_spinner"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="57dp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/photographer_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_done"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
+        android:layout_alignLeft="@+id/name_editText"
+        android:layout_alignStart="@+id/name_editText"
         android:layout_marginBottom="50dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/photographer_name"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignRight="@+id/name_editText"
+        android:layout_alignEnd="@+id/name_editText" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/years_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText2"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
+        android:layout_above="@+id/photographer_editText"
+        android:layout_alignLeft="@+id/photographer_editText"
+        android:layout_alignStart="@+id/photographer_editText"
         android:layout_marginBottom="60dp"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignRight="@+id/name_editText"
+        android:layout_alignEnd="@+id/name_editText" />
 </RelativeLayout>
